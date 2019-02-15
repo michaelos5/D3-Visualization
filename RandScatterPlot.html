@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>D3 : Random Number Generation - Column Chart</title>
+	<script src="d3/d3.v3.js" charset="utf-8"></script>
+	<style type="text/css">
+		#chartholder {
+			height: 400px;
+			width: 1200px;
+		}
+		.bar {
+			display: inline-block;
+			width: 30px;
+			height: 10px; /* Gets overridden by D3 height below */
+			margin-right: 4px;
+			background-color: teal;
+		}
+	</style>
+</head>
+<body>
+	<div id="chartholder"></div>
+
+	<script type="text/javascript">
+		
+		// Random Dataset Method 3 (D3 Random Number Generation)
+
+		function getRandomInt(max) {
+			return Math.floor(Math.random() * Math.floor(max));
+		}
+		var w = 800;
+		var h = 400;
+		var data = d3.range(100).map(function() {
+			point = [getRandomInt(w), getRandomInt(h)];
+			return point;
+		});
+		console.log(data);
+		var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+		svg.selectAll("circle")
+			   .data(data)
+			   .enter()
+			   .append("circle")
+			   .attr("cx", function(d) {
+			   		return d[0];
+			   })
+			   .attr("cy", function(d) {
+			   		return d[1];
+			   })
+			   .attr("r", 5);
+	</script>
+</body>
+</html>
